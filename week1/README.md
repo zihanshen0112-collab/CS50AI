@@ -74,21 +74,88 @@ As assuming all innitially provided code of the program is correct,
 any possible errors can be solved by rechek the syntext and context of translations in the knowledge base.
 
 # Design
+The following graphs shows some basic stratcure common in each knowledge base
+ - Cheking of no multi roles for every charecter
+```mermaid
+graph LR
+A{For all characters} -- and --> B((character A))
+A -- and --> C((character B))
+A -- and --> D((……))
+    subgraph Cp[Possible roles]
+        direction TD
+        Ep(character is knight) <-->|or| Fp(character is knave)
+    end
+B --> Cp
+C --> Cp
+D --> Cp
+        
+    subgraph Bgl[Mutually Exclusive]
+        direction LR
+        E(character is knight) <-->|and| F(character is knave)
+    end
+Cp -- not --> Bgl
+```
+
+ - Implicate a character's possible roles with the truth value of the proposition stated in their dialog 
+  > For readablity, using `Implicate(character, dialog)` in the following context.
+  > using character A and A's dialog "I am both a knight and a knave." as example.
+```mermaid
+graph LR
+G{possible roles of A} -- if --> H[A is knight]
+G -- if --> K[A is knave]
+    subgraph Wa[A's words]
+        direction LR
+        I(A is knight) <-->|and| J(A is knave)
+    end
+H -- then --> Wa
+K -- then not --> Wa
+```
+ > As mentiond above, "if A then B" means that A `implicates` B, which is the actual logic connectives used in the code. 
+ > The two posibile roles of A is acctrally connected using `And`, but since if the frist proposition in `Implication` is false, the expression is always true. Therefore, in each modol, the program will only consider one possible role of A.
+
 The following graphs displaces the logic in each knowledge base
- - Knowledge Base 0
+- Knowledge 0
+```mermaid
+graph RL
+A{Knowledge 0} --> B[Cheking of no multi roles for character A]
+B -- and --> C[Implicate(A, "I am both a knight and a knave.")]
+```
+
+- Knowledge 1
+```mermaid
+graph RL
+A{Knowledge 1} --> B[Cheking of no multi roles for character A and B]
+B -- and --> C[Implicate(A, "We are both knaves.")]
+```
+
+- Knowledge 2
+```mermaid
+graph RL
+A{Knowledge 2} --> B[Cheking of no multi roles for character A and B]
+B -- and --> C[Implicate(A, "We are the same kind.")]
+C -- and --> D[Implicate(B, "We are of different kinds.")]
+```
+ > translating "We are the same kind." using Biconditional ("We are of different kinds." is `Not("We are the same kind.")`)
+ ```mermaid
+ graph RL
+ A(A is knight) <-->|Biconditional| B(B is knight)
+ ```
+
+- Knowledge 3
 ```mermaid
 graph TD
-    subgraph A[No multiy roles]
-        directio LR
-        B{For all characters} -- or --> C((character A))
-        C --> D[character is either knight or knave]
-        
-        subgraph E[Mutually Exclusive]
-            direction LR
-            F(character is knight) <-->|and| G(character is knave)
-        end
-        
-        D -- not --> E
+A{Knowledge 2} --> B[Cheking of no multi roles for character A, B and C]
+    subgraph Da
+        digrection RL
+        As1{possible dialog of A} -- or --> Bs1[A say "I am a knight."]
+        As1 -- or --> Cs1[A say "I am a knave."]
+        Bs1 --> Ds1[Implicate(A, "I am a knight.")]
+        Cs1 --> Es1[Implicate(A, "I am a knave.")]
     end
-B{Knowledge Base 0} -- and --> A
+B -- and --> Da
+Da -- and --> E[Implicate(B, "A said 'I am a knave'.")]
+E -- and --> F[Implicate(B, "C is a knave.")]
+F -- and --> G[Implicate(C, "A is a knight.")]
 ```
+ > The proposition stated in "A said 'I am a knave'." is a condition having two posibilities conncted using `And`,
+ which is similar to `Implicate(A, "I am a knave.")`
