@@ -80,11 +80,11 @@ The following graphs shows some basic stratcure common in each knowledge base
 graph LR
 A{For all characters} -- and --> B((character A))
 A -- and --> C((character B))
-A -- and --> D((other characters))
-    subgraph Cp[Possible roles]
+A -- and --> D((other charact))
+    subgraph Bgl[Mutually Exclusive]
         direction TD
         E(character is knight) <-->|or| F(character is knave)
-    end
+    end 
 B --> Cp
 C --> Cp
 D --> Cp
