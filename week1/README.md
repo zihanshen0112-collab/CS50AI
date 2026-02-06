@@ -97,7 +97,7 @@ Cp -- not --> Bgl
 ```
 
  - Implicate a character's possible roles with the truth value of the proposition stated in their dialog 
-  > For readablity, using `Implicate(character, dialog)` in the following context.
+  > For readablity, using `Implicate: character, dialog` in the following context.
 
   > Using character A and A's dialog "I am both a knight and a knave." as example.
 ```mermaid
@@ -120,22 +120,22 @@ The following graphs displaces the logic in each knowledge base
 ```mermaid
 graph RL
 A{Knowledge 0} --> B[Cheking of no multi roles for character A]
-B -- and --> C[Implicate(A, 'I am both a knight and a knave.')]
+B -- and --> C[Implicate: A, 'I am both a knight and a knave.']
 ```
 
 - Knowledge 1
 ```mermaid
 graph RL
 A{Knowledge 1} --> B[Cheking of no multi roles for character A and B]
-B -- and --> C[Implicate(A, 'We are both knaves.')]
+B -- and --> C[Implicate: A, 'We are both knaves.']
 ```
 
 - Knowledge 2
 ```mermaid
 graph RL
 A{Knowledge 2} --> B[Cheking of no multi roles for character A and B]
-B -- and --> C[Implicate(A, 'We are the same kind.')]
-C -- and --> D[Implicate(B, 'We are of different kinds.')]
+B -- and --> C[Implicate: A, 'We are the same kind.']
+C -- and --> D[Implicate: B, 'We are of different kinds.']
 ```
  > translating "We are the same kind." using Biconditional ("We are of different kinds." is `Not("We are the same kind.")`)
  ```mermaid
@@ -151,13 +151,13 @@ A{Knowledge 2} --> B[Cheking of no multi roles for character A, B and C]
         digrection RL
         As1{possible dialog of A} -- or --> Bs1[A say 'I am a knight.']
         As1 -- or --> Cs1[A say 'I am a knave.']
-        Bs1 --> Ds1[Implicate(A, "I am a knight.")]
-        Cs1 --> Es1[Implicate(A, "I am a knave.")]
+        Bs1 --> Ds1[Implicate: A, 'I am a knight.']
+        Cs1 --> Es1[Implicate: A, 'I am a knave.']
     end
 B -- and --> Da
-Da -- and --> E[Implicate(B, 'A said 'I am a knave'.')]
-E -- and --> F[Implicate(B, 'C is a knave.')]
-F -- and --> G[Implicate(C, 'A is a knight.')]
+Da -- and --> E[Implicate: B, 'A said 'I am a knave'.']
+E -- and --> F[Implicate: B, 'C is a knave.']
+F -- and --> G[Implicate: C, 'A is a knight.']
 ```
  > The proposition stated in "A said 'I am a knave'." is a condition having two posibilities conncted using `And`,
  which is similar to `Implicate(A, "I am a knave.")`
