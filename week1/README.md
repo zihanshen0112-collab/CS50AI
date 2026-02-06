@@ -77,14 +77,18 @@ any possible errors can be solved by rechek the syntext and context of translati
 The following graphs displaces the logic in each knowledge base
  - Knowledge Base 0
 ```mermaid
-graph LR
-    A{For all characters} -- or --> B((character A))
-    B --> C[The character is either knight or knave]
-    
-    subgraph H[Mutually Exclusive]
-        direction LR
-        E(Knight) <-->|and| F(Knave)
+graph TD
+    subgraph A[No multiy roles]
+        directio LR
+        B{For all characters} -- or --> C((character A))
+        C --> D[character is either knight or knave]
+        
+        subgraph E[Mutually Exclusive]
+            direction LR
+            F(character is knight) <-->|and| G(character is knave)
+        end
+        
+        D -- not --> E
     end
-    
-    C -- not --> H
+B{Knowledge Base 0} -- and --> A
 ```
