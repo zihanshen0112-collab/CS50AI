@@ -81,9 +81,9 @@ graph LR
 A{For all characters} -- and --> B((character A))
 A -- and --> C((character B))
 A -- and --> D((……))
-subgraph Cp[Possible roles]
-    direction TD
-    E(character is knight) <-->|or| F(character is knave)
+    subgraph Cp[Possible roles]
+        direction TD
+        E(character is knight) <-->|or| F(character is knave)
     end
 B --> Cp
 C --> Cp
@@ -118,21 +118,21 @@ K -- then not --> Wa
 The following graphs displaces the logic in each knowledge base
 - Knowledge 0
 ```mermaid
-graph RL
+graph LR
 A{Knowledge 0} --> B[Cheking of no multi roles for character A]
 B -- and --> C[Implicate: A, 'I am both a knight and a knave.']
 ```
 
 - Knowledge 1
 ```mermaid
-graph RL
+graph LR
 A{Knowledge 1} --> B[Cheking of no multi roles for character A and B]
 B -- and --> C[Implicate: A, 'We are both knaves.']
 ```
 
 - Knowledge 2
 ```mermaid
-graph RL
+graph LR
 A{Knowledge 2} --> B[Cheking of no multi roles for character A and B]
 B -- and --> C[Implicate: A, 'We are the same kind.']
 C -- and --> D[Implicate: B, 'We are of different kinds.']
@@ -147,8 +147,8 @@ C -- and --> D[Implicate: B, 'We are of different kinds.']
 ```mermaid
 graph TD
 A{Knowledge 2} --> B[Cheking of no multi roles for character A, B and C]
-    subgraph Da
-        digrection RL
+    subgraph Da[character A's Dialog]
+        direction RL
         As1{possible dialog of A} -- or --> Bs1[A say 'I am a knight.']
         As1 -- or --> Cs1[A say 'I am a knave.']
         Bs1 --> Ds1[Implicate: A, 'I am a knight.']
