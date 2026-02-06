@@ -81,7 +81,7 @@ graph LR
 A{For all characters} -- and --> B((character A))
 A -- and --> C((character B))
 A -- and --> D((other charact))
-    subgraph Bgl[Possible roles]
+    subgraph Cp[Possible roles]
         direction TD
         E(character is knight) <-->|or| F(character is knave)
     end 
