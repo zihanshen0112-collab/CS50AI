@@ -80,7 +80,7 @@ The following graphs shows some basic stratcure common in each knowledge base
 graph LR
 A{For all characters} -- and --> B((character A))
 A -- and --> C((character B))
-A -- and --> D((……))
+A -- and --> D((other characters))
     subgraph Cp[Possible roles]
         direction TD
         E(character is knight) <-->|or| F(character is knave)
@@ -148,7 +148,7 @@ C -- and --> D[Implicate: B, 'We are of different kinds.']
 graph TD
 A{Knowledge 2} --> B[Cheking of no multi roles for character A, B and C]
     subgraph Da[character A's Dialog]
-        direction RL
+        direction LR
         As1{possible dialog of A} -- or --> Bs1[A say 'I am a knight.']
         As1 -- or --> Cs1[A say 'I am a knave.']
         Bs1 --> Ds1[Implicate: A, 'I am a knight.']
