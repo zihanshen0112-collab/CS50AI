@@ -82,7 +82,7 @@ A{For all characters} -- and --> B((character A))
 A -- and --> C((character B))
 A -- and --> D((other characters))
     subgraph Cp[Possible roles of characters]
-        direction TD
+        direction TB
         E1(character is knight) <-->|or| F1(character is knave)
     end
 B --> Cp
