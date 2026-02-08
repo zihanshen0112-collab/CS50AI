@@ -2,31 +2,31 @@
 Here are terms you should understand before reading this file.
  - Knights and Knaves puzzle
 
- A logical reasoning game
+  > A logical reasoning game
 
  - proposition
 
- Statements about the world that can be either true or false
+  > Statements about the world that can be either true or false
 
  - logic connectives
 
- An operation to one or more propositions
+  > An operation to one or more propositions
 
  - knowledge base
 
- A set of sentences known by a knowledge-based agent. For a program, it is knowledge provided about the world in the form of propositional logic sentences that can be used to make additional inferences about the world
+  > A set of sentences known by a knowledge-based agent. For a program, it is knowledge provided about the world in the form of propositional logic sentences that can be used to make additional inferences about the world
 
  - truth values
 
- Boolean values include True and False
+  > Boolean values include True and False
 
  - model
 
- An assignment of a truth value to every proposition
+  > An assignment of a truth value to every proposition
 
  - entailment 
- 
- If A entails B, then in any world where A is true, B is true too.
+
+  > If A entails B, then in any world where A is true, B is true too.
 
 # Planning
 In a Knights and Knaves puzzle, the basic game logic is the following:
