@@ -125,6 +125,7 @@ If their is any error appear while operating the code with a interpreter, the pr
 ### Check PR sum
 The following graphs shows the logic for checking if the sum of all pagerank values has a difference with `1` less than `1e - 10`
 - This checking method is called `Check PR sum` in the following graphs
+
 ```mermaid
 flowchart LR
     L --> M[calculate total = sum of all pagerank values]
@@ -136,7 +137,9 @@ flowchart LR
 
 ### Transition model
 The following graph show the basic logic of `transition_model(corpus, page, damping_factor)`
-- probability of visit random new page(1-d) = nd
+- `nd` is the probability of visit random new page (1-d) 
+- `N` is the total number of web pages in the corpus
+- `Nl` is the total number of links from one web page
 ```mermaid
 flowchart LR
     A[current page] --> B{are there links<br>to other pages?}
@@ -144,7 +147,7 @@ flowchart LR
     B -->|yes| D[use existing links]
 
     C --> E[every page gains probability:<br> nd/N + d/N]
-    D --> F[linked pages gain robability:<br> nd/N + d/Total number of links <br>non-linked pages gain:<br> nd/N]
+    D --> F[linked pages gain robability:<br> nd/N + d/Nl <br>non-linked pages gain:<br> nd/N]
 
     E --> G[return probability distribution]
     F --> G
@@ -194,7 +197,7 @@ flowchart LR
         Compute --> Update[Update all new pagerank values]
         Update --> Check{Convergence Check}
         Check -->|No| LoopStart
-        Check -->|Yes| Normalize[Break]
+        Check -->|Yes| Break[Break]
     end
 
     ip --> lp
