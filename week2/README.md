@@ -136,14 +136,14 @@ flowchart LR
 The following graph show the basic logic of `transition_model(corpus, page, damping_factor)`
 ```mermaid
 flowchart LR
-    A[current page] --> B{are links to other pages?}
-    B -->|no| C[Link to all pages]
-    B -->|yes| D[Use exisit links]
-    
-    C --> E[Every page gain probability:<br>(1-d)/N + d/N]
-    D --> F[Linked pages gain probability:<br>(1-d)/N + d/len(links)<br>None linked pages gain probability:<br>(1-d)/N]
-    
-    E --> G[Return the probability distribution]
+    A[current page] --> B{are there links<br>to other pages?}
+    B -->|no| C[link to all pages]
+    B -->|yes| D[use existing links]
+
+    C --> E[every page gains:<br>(1-d)/N + d/N]
+    D --> F[linked pages gain:<br>(1-d)/N + d/len(links)<br>non-linked pages gain:<br>(1-d)/N]
+
+    E --> G[return probability distribution]
     F --> G
 ```
 
