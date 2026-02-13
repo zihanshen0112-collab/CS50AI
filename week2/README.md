@@ -122,8 +122,9 @@ If their is any error appear while operating the code with a interpreter, the pr
 3. If the output pagerank value has large difference with manual perdiction, check the lines about calculation, equation used and roundings for mistakes and fix it.
 
 # Design
+### Check PR sum
 The following graphs shows the logic for checking if the sum of all pagerank values has a difference with `1` less than `1e - 10`
-> This checking method is called `Check PR sum` in the following graphs
+- This checking method is called `Check PR sum` in the following graphs
 ```mermaid
 flowchart LR
     L --> M[calculate total = sum of all pagerank values]
@@ -133,20 +134,23 @@ flowchart LR
     N -->|yes| P[Countinous]
 ```
 
+### Transition model
 The following graph show the basic logic of `transition_model(corpus, page, damping_factor)`
+- probability of visit random new page(1-d) = nd
 ```mermaid
 flowchart LR
     A[current page] --> B{are there links<br>to other pages?}
     B -->|no| C[link to all pages]
     B -->|yes| D[use existing links]
 
-    C --> E[every page gains probability:<br> probability of visit random new page /N + d/N]
-    D --> F[linked pages gain robability:<br> probability of visit random new page /N + d/Total number of links <br>non-linked pages gain:<br> probability of visit random new page /N]
+    C --> E[every page gains probability:<br> nd/N + d/N]
+    D --> F[linked pages gain robability:<br> nd/N + d/Total number of links <br>non-linked pages gain:<br> nd/N]
 
     E --> G[return probability distribution]
     F --> G
 ```
 
+### Sample pagerank
 The following graph show the basic logic of `sample_pagerank(corpus, damping_factor, n)`
 ```mermaid
 flowchart LR
@@ -170,6 +174,7 @@ flowchart LR
     Return --> End
 ```
 
+### Iterate pagerank 
 The following graph show the basic logic of `iterate_pagerank(corpus, damping_factor)`
 ```mermaid
 flowchart LR
@@ -199,6 +204,8 @@ flowchart LR
     Check2 --> Return[Return final PageRank dictionary]
     Return --> End([End])
 ```
+
+### Convergence Check
 The following graph show the basic logic of `Convergence Check`
 ```mermaid
 flowchart LR
