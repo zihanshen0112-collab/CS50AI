@@ -140,8 +140,8 @@ flowchart LR
     B -->|no| C[link to all pages]
     B -->|yes| D[use existing links]
 
-    C --> E[every page gains:<br>(1-d)/N + d/N]
-    D --> F[linked pages gain:<br>(1-d)/N + d/len(links)<br>non-linked pages gain:<br>(1-d)/N]
+    C --> E[every page gains probability:<br> probability of visit random new page /N + d/N]
+    D --> F[linked pages gain robability:<br> probability of visit random new page /N + d/Total number of links <br>non-linked pages gain:<br> probability of visit random new page /N]
 
     E --> G[return probability distribution]
     F --> G
