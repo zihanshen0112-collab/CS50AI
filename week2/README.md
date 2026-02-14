@@ -193,7 +193,7 @@ flowchart LR
     subgraph lp[Looping]
         direction TB
         LoopStart{Not converged}
-        LoopStart -->|No| Compute[For each page, calculate new rank using the equation]
+        LoopStart --> Compute[For each page, calculate new rank using the equation]
         Compute --> Update[Update all new pagerank values]
         Update --> Check{Convergence Check}
         Check -->|No| LoopStart
