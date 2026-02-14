@@ -128,7 +128,7 @@ The following graphs shows the logic for checking if the sum of all pagerank val
 
 ```mermaid
 flowchart LR
-    L --> M[calculate total = sum of all pagerank values]
+    L{Start} --> M[calculate total = sum of all pagerank values]
     M --> N{is the difference between total and 1 small engough?}
     
     N -->|no| O[Raise AssertionError]
