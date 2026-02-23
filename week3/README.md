@@ -1,4 +1,4 @@
-# Backgroudn Information
+e# Backgroudn Information
 Here are terms you should understand before reading this file.
 1. Constraint Satisfaction Problem (CSP)
 
@@ -136,7 +136,7 @@ There are two python files in this project: **crossword.py** and **generate.py**
     It calls three abstract fuctions, expected to be realize by the programer, in sequesce to generate the puzzle according to the aforementioned three steps. They are(in sequence) `enforce_node_consistency`, `ac3` and `backtrack`
 
 ### Development procedure
-For the sake of realizing the aforementioned goal of the project, eight abstract functions in **generate.py** should be complete. They are the following:
+For the sake of realizing the aforementioned goal of the project, eight abstract functions in **generate.py** should be complete with the requirements as the following:
 
 1. `enforce_node_consistency`
 
