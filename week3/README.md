@@ -156,7 +156,7 @@ For the sake of realizing the aforementioned goal of the project, eight abstract
 
     Enforce arc consistency on the CSP of corssword puzzle
 
-    Call `revise` for all arcs in the CSP of corssword puzzle, add the arc back to the list of arcs if the domain of first variable in the arc is changed after the last `revise`.
+    Call `revise` for all arcs in the CSP of corssword puzzle in a list, add the arc back to the list if the domain of first variable in the arc is changed after the last `revise`.
 
     Returns `True` if varify arc consistency, returns `False` if unable to enforce arc consistency, which is the domain of a variable is empty after calling `revise`.
 
@@ -202,7 +202,7 @@ flowchart LR
     Start([Start]) --> Loop{More variables?}
     Loop -->|Yes| GetVar[Get next variable var]
     GetVar --> CheckWords[For each word in domain]
-    CheckWords --> CheckLen{len(word) == var.length?}
+    CheckWords --> CheckLen{is the length of the word equals to variable.length}
     CheckLen -->|No| Remove[Remove word from domain]
     CheckLen -->|Yes| CheckWords
     Remove --> CheckWords
@@ -213,12 +213,12 @@ flowchart LR
 ### revise
 ```mermaid
 flowchart LR
-    Start([Start revise(x,y)]) --> GetOverlap[Get overlap info]
+    Start([Start revise of x,y]) --> GetOverlap[Get overlap info]
     GetOverlap --> Overlap{Overlap exists?}
     Overlap -->|No| ReturnFalse([Return False])
-    Overlap -->|Yes| GetPos[Get (i,j) positions]
+    Overlap -->|Yes| GetPos[Get positions of the overlap as i,j]
     GetPos --> LoopX[For each word_x in domain x]
-    LoopX --> FindMatch{Exists word_y with<br>word_x[i] == word_y[j]?}
+    LoopX --> FindMatch{Exists word_y with<br>the letter at the overlap of word_y is the same as word_x}
     FindMatch -->|No| MarkRemove[Mark word_x for removal]
     FindMatch -->|Yes| LoopX
     MarkRemove --> LoopX
@@ -231,16 +231,16 @@ flowchart LR
 ### ac3
 ```mermaid
 flowchart LR
-    Start([Start ac3]) --> InitQueue[Initialize queue with arcs]
-    InitQueue --> QueueEmpty{Queue empty?}
+    Start([Start ac3]) --> InitQueue[Initialize list with arcs]
+    InitQueue --> QueueEmpty{list empty?}
     QueueEmpty -->|Yes| ReturnTrue([Return True])
-    QueueEmpty -->|No| Pop[(x,y) = pop queue]
-    Pop --> CallRevise[Call revise(x,y)]
+    QueueEmpty -->|No| Pop[pop a arc x,y from the list]
+    Pop --> CallRevise[Call function revise of x,y]
     CallRevise --> Revised{revise True?}
     Revised -->|No| QueueEmpty
     Revised -->|Yes| DomainEmpty{domain x empty?}
     DomainEmpty -->|Yes| ReturnFalse([Return False])
-    DomainEmpty -->|No| AddNeighbors[Add (z,x) for all neighbors z ≠ y]
+    DomainEmpty -->|No| AddNeighbors[Add z,x for all neighbors z ≠ y]
     AddNeighbors --> QueueEmpty
 ```
 
